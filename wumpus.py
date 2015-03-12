@@ -6,6 +6,7 @@ import sys
 from collections import namedtuple
 from PyQt4 import QtGui
 
+classic_5x4 = ["es","esw","esw","esw","sw","nes","nesw","nesw","nesw","nsw","nes","nesw","nesw","nesw","nsw","ne","new","new","new","nw"]
 black_5x4 = ["black","black","black","black","black","black","black","black","black","black","black","black","black","black","black","black","black","black","black","black",]
 #You can create a field by making a list of 20 tile names (5x4), and setting the properties of the names in Tile().setType(name). The tiles' order is first from left to right and then from top to bottom:
 #   1,  2,  3,  4,  5,
@@ -44,91 +45,91 @@ class Tile(QtGui.QWidget):
             self.S_open = True
             self.W_open = True
         elif name == "n":
-            #picture = images/n_tile.jpg
+            self.image = self.setImage("images/n_tile.png")
             self.N_open = True
             self.E_open = False
             self.S_open = False
             self.W_open = False
         elif name == "e":
-            #picture = images/e_tile.jpg
+            self.image = self.setImage("images/e_tile.png")
             self.N_open = False
             self.E_open = True
             self.S_open = False
             self.W_open = False
         elif name == "s":
-            #picture = images/s_tile.jpg
+            self.image = self.setImage("images/s_tile.png")
             self.N_open = False
             self.E_open = False
             self.S_open = True
             self.W_open = False
         elif name == "w":
-            #picture = images/w_tile.jpg
+            self.image = self.setImage("images/w_tile.png")
             self.N_open = False
             self.E_open = False
             self.S_open = False
             self.W_open = True
         elif name == "ne":
-            #picture = images/ne_tile.jpg
+            self.image = self.setImage("images/ne_tile.png")
             self.N_open = True
             self.E_open = True
             self.S_open = False
             self.W_open = False
         elif name == "ns":
-            #picture = images/ns_tile.jpg
+            self.image = self.setImage("images/ns_tile.png")
             self.N_open = True
             self.E_open = False
             self.S_open = True
             self.W_open = False
         elif name == "nw":
-            #picture = images/nw_tile.jpg
+            self.image = self.setImage("images/nw_tile.png")
             self.N_open = True
             self.E_open = False
             self.S_open = False
             self.W_open = True
         elif name == "es":
-            #picture = images/es_tile.jpg
+            self.image = self.setImage("images/es_tile.png")
             self.N_open = False
             self.E_open = True
             self.S_open = True
             self.W_open = False
         elif name == "ew":
-            #picture = images/ew_tile.jpg
+            self.image = self.setImage("images/ew_tile.png")
             self.N_open = False
             self.E_open = True
             self.S_open = False
             self.W_open = True
         elif name == "sw":
-            #picture = images/sw_tile.jpg
+            self.image = self.setImage("images/sw_tile.png")
             self.N_open = False
             self.E_open = False
             self.S_open = True
             self.W_open = True
         elif name == "nes":
-            #picture = images/nes_tile.jpg
+            self.image = self.setImage("images/nes_tile.png")
             self.N_open = True
             self.E_open = True
             self.S_open = True
             self.W_open = False
         elif name == "new":
-            #picture = images/new_tile.jpg
+            self.image = self.setImage("images/new_tile.png")
             self.N_open = True
             self.E_open = True
             self.S_open = False
             self.W_open = True
         elif name == "nsw":
-            #picture = images/nsw_tile.jpg
+            self.image = self.setImage("images/nsw_tile.png")
             self.N_open = True
             self.E_open = False
             self.S_open = True
             self.W_open = True
         elif name == "esw":
-            #picture = images/esw_tile.jpg
+            self.image = self.setImage("images/esw_tile.png")
             self.N_open = False
             self.E_open = True
             self.S_open = True
             self.W_open = True
         elif name == "nesw":
-            #picture = images/nesw_tile.jpg
+            self.image = self.setImage("images/nesw_tile.png")
             self.N_open = True
             self.E_open = True
             self.S_open = True
@@ -146,7 +147,7 @@ class GameField(QtGui.QWidget):
         self.width = 5
         self.height = 4
         self.seize = self.width*self.height
-        self.field = black_5x4
+        self.field = classic_5x4
 
         self.setGeometry(400,200,self.width*100,self.height*100)
         
