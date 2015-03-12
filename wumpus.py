@@ -19,16 +19,26 @@ class Tile(QtGui.QWidget):
     """Creates a field tile and all of its atributes."""
 
     def __init__(self, parent, name, position):
-        super(Tile, self).__init__()
+        super(Tile, self).__init__(parent)
         self.parent = parent
         self.position = position
 
         self.setType(name)
 
+    def setImage(self, image_name):
+        """Sets and show image of tile"""
+        pixmap = QtGui.QPixmap(image_name)
+        pixlabel = QtGui.QLabel(self)
+        pixlabel.setPixmap(pixmap)
+
+    def findCenter(self):
+        """Returns center of tile as QPoint()"""
+        self.center = self.geometry().center()
+
     def setType(self, name):
         """Sets tile type by name"""
         if name == "black":
-            #picture = images/black.jpg
+            self.image = self.setImage("images/black.jpg")
             self.N_open = True
             self.E_open = True
             self.S_open = True
@@ -106,13 +116,13 @@ class Tile(QtGui.QWidget):
             self.S_open = False
             self.W_open = True
         elif name == "nsw":
-            #picture = images/n_tile.jpg
+            #picture = images/nsw_tile.jpg
             self.N_open = True
             self.E_open = False
             self.S_open = True
             self.W_open = True
         elif name == "esw":
-            #picture = images/n_tile.jpg
+            #picture = images/esw_tile.jpg
             self.N_open = False
             self.E_open = True
             self.S_open = True
@@ -123,9 +133,6 @@ class Tile(QtGui.QWidget):
             self.E_open = True
             self.S_open = True
             self.W_open = True
-
-    def findCenter(self):
-        self.center = self.geometry().center()
 
 class GameField(QtGui.QWidget):
     """Creates the game field with a list of tile names predetermined by the programmer."""
