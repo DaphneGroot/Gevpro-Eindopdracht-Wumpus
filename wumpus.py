@@ -3,6 +3,7 @@
 #Daphne Groot, Hennie Veldthuis, Roos Vermeulen
 
 import sys
+from random import randrange
 from collections import namedtuple
 from PyQt4 import QtGui
 
@@ -23,8 +24,31 @@ class Tile(QtGui.QWidget):
         super(Tile, self).__init__(parent)
         self.parent = parent
         self.position = position
+        self.bats = False
+        self.gold = False
+        self.hole = False
 
         self.setType(name)
+        
+    def setItem(self, item):#item is: bats, hole, gold
+		if item == "bats":
+			self.bats = True
+		elif item == "gold":
+			self.gold = True
+		elif item == "hole":
+			self.hole = True
+		else:
+			pass
+		
+    def removeItem(self, item):#item is: bats, hole, gold
+		if item == "bats":
+			self.bats = False
+		elif item == "gold":
+			self.gold = False
+		elif item == "hole":
+			self.hole = False
+		else:
+			pass
 
     def setImage(self, image_name):
         """Sets and show image of tile"""
@@ -142,6 +166,7 @@ class GameField(QtGui.QWidget):
         super(GameField, self).__init__()
 
         self.initUI()
+        self.placeItemsRandomly()
 
     def initUI(self):
         self.width = 5
@@ -167,6 +192,33 @@ class GameField(QtGui.QWidget):
 
         print(self.tile_dic[(4,3)].center)#Test function, this is how you get the center of a 'coordinate'
         print(self.tile_dic[(4,3)].W_open)#Test function, this is how you can see if that direction is open for Jack and Wumpus (True) or if there's a wall (False)
+        
+    def placeItemsRandomly(self):
+		new_gold_amount = 5
+		new_hole_amount = 1
+		new_bats_amount = 1
+		
+		positions_list = []
+		
+		while len(positions_list) < new_gold_amount+new_hole_amount+new_bats_amount:
+			x = randrange(self.width)
+			y = randrange(self.height)
+			
+			if not ((x,y) in positions_list):
+				positions_list.append((x,y))
+		
+		for position in positions_list:
+			if new_gold_amount > 0:
+				self.tile_dic[position].setItem("gold")
+				new_gold_amount = new_gold_amount - 1
+			elif new_hole_amount > 0:
+				self.tile_dic[position].setItem("hole")
+				new_hole_amount = new_hole_amount - 1
+			elif new_bats_amount > 0:
+				self.tile_dic[position].setItem("bats")
+				new_bats_amount = new_bats_amount - 1
+			
+			
 
 def main():
     
