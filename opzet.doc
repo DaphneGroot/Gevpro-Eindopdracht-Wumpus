@@ -1,63 +1,82 @@
 {\rtf1\ansi\ansicpg1252\deff0\uc1
 {\fonttbl
 {\f0\fnil\fcharset0\fprq0\fttruetype Times New Roman;}
-{\f1\fnil\fcharset0\fprq0\fttruetype Liberation Sans;}
-{\f2\fnil\fcharset0\fprq0\fttruetype Courier New;}}
+{\f1\fnil\fcharset0\fprq0\fttruetype Arial;}
+{\f2\fnil\fcharset0\fprq0\fttruetype Liberation Sans;}
+{\f3\fnil\fcharset0\fprq0\fttruetype Courier New;}}
 {\colortbl
 \red0\green0\blue0;
 \red255\green255\blue255;
 \red255\green255\blue255;}
 {\stylesheet
-{\s6\fi-431\li720\sbasedon28\snext28 Contents 1;}
-{\s7\fi-431\li1440\sbasedon28\snext28 Contents 2;}
-{\s1\fi-431\li720 Arrowhead List;}
-{\s27\fi-431\li720\sbasedon28 Lower Roman List;}
+{\s6\fi-430\li720\sbasedon28\snext28 Contents 1;}
+{\s7\fi-430\li1440\sbasedon28\snext28 Contents 2;}
+{\s1\fi-430\li720 Arrowhead List;}
+{\s27\fi-430\li720\sbasedon28 Lower Roman List;}
 {\s29\tx431\sbasedon20\snext28 Numbered Heading 1;}
 {\s30\tx431\sbasedon21\snext28 Numbered Heading 2;}
-{\s12\fi-431\li720 Diamond List;}
-{\s9\fi-431\li2880\sbasedon28\snext28 Contents 4;}
-{\s8\fi-431\li2160\sbasedon28\snext28 Contents 3;}
+{\s12\fi-430\li720 Diamond List;}
+{\s9\fi-430\li2880\sbasedon28\snext28 Contents 4;}
+{\s8\fi-430\li2160\sbasedon28\snext28 Contents 3;}
 {\s31\tx431\sbasedon22\snext28 Numbered Heading 3;}
-{\s32\fi-431\li720 Numbered List;}
+{\s32\fi-430\li720 Numbered List;}
 {\s15\sbasedon28 Endnote Text;}
 {\*\cs14\fs20\super Endnote Reference;}
-{\s4\fi-431\li720 Bullet List;}
+{\s4\fi-430\li720 Bullet List;}
 {\s5\tx1584\sbasedon29\snext28 Chapter Heading;}
-{\s35\fi-431\li720 Square List;}
-{\s11\fi-431\li720 Dashed List;}
-{\s22\sb440\sa60\f1\fs24\b\sbasedon28\snext28 Heading 3;}
-{\s37\fi-431\li720 Tick List;}
-{\s24\fi-431\li720 Heart List;}
-{\s40\fi-431\li720\sbasedon32 Upper Roman List;}
-{\s39\fi-431\li720\sbasedon32 Upper Case List;}
+{\s35\fi-430\li720 Square List;}
+{\s11\fi-430\li720 Dashed List;}
+{\s22\sb440\sa60\f2\fs24\b\sbasedon28\snext28 Heading 3;}
+{\s37\fi-430\li720 Tick List;}
+{\s24\fi-430\li720 Heart List;}
+{\s40\fi-430\li720\sbasedon32 Upper Roman List;}
+{\s39\fi-430\li720\sbasedon32 Upper Case List;}
 {\s16\fi-288\li288\fs20\sbasedon28 Footnote;}
-{\s19\fi-431\li720 Hand List;}
+{\s19\fi-430\li720 Hand List;}
 {\s18\fs20\sbasedon28 Footnote Text;}
-{\s20\sb440\sa60\f1\fs34\b\sbasedon28\snext28 Heading 1;}
-{\s21\sb440\sa60\f1\fs28\b\sbasedon28\snext28 Heading 2;}
-{\s10\qc\sb240\sa120\f1\fs32\b\sbasedon28\snext28 Contents Header;}
-{\s23\sb440\sa60\f1\fs24\b\sbasedon28\snext28 Heading 4;}
+{\s20\sb440\sa60\f2\fs34\b\sbasedon28\snext28 Heading 1;}
+{\s21\sb440\sa60\f2\fs28\b\sbasedon28\snext28 Heading 2;}
+{\s10\qc\sb240\sa119\f2\fs32\b\sbasedon28\snext28 Contents Header;}
+{\s23\sb440\sa60\f2\fs24\b\sbasedon28\snext28 Heading 4;}
 {\s28\f0\fs24 Normal;}
-{\s26\fi-431\li720\sbasedon32 Lower Case List;}
-{\s2\li1440\ri1440\sa120\sbasedon28 Block Text;}
-{\s33\f2\sbasedon28 Plain Text;}
+{\s26\fi-430\li720\sbasedon32 Lower Case List;}
+{\s2\li1440\ri1440\sa119\sbasedon28 Block Text;}
+{\s33\f3\sbasedon28 Plain Text;}
 {\s34\tx1584\sbasedon29\snext28 Section Heading;}
-{\s25\fi-431\li720 Implies List;}
-{\s3\fi-431\li720 Box List;}
-{\s36\fi-431\li720 Star List;}
+{\s25\fi-430\li720 Implies List;}
+{\s3\fi-430\li720 Box List;}
+{\s36\fi-430\li720 Star List;}
 {\*\cs17\fs20\super Footnote Reference;}
-{\s38\fi-431\li720 Triangle List;}
+{\s38\fi-430\li720 Triangle List;}
 {\s13\fi-288\li288\sbasedon28 Endnote;}}
-\kerning0\cf0\ftnbj\fet2\ftnstart1\ftnnar\aftnnar\ftnstart1\aftnstart1\aenddoc\revprop3{\*\rdf}{\info\uc1{\author Daphne Groot}}\deftab720\viewkind1\paperw11905\paperh16837\margl1440\margr1440\widowctrl
+{\*\listtable
+{\list\listtemplateid1011\listsimple{\listlevel\levelnfc23\levelstartat0\levelspace0\levelfollow0\fi-430\li720{\leveltext\'01\u8226 ;}{\levelnumbers;}}\listid1005}}
+{\*\listoverridetable
+{\listoverride\listoverridecount0\listid1005\levelnfc23\levelstartat0\levelspace0\levelfollow0\fi-430\li720{\leveltext\'01\u8226 ;}{\levelnumbers;}\ls1}}
+
+\kerning0\cf0\ftnbj\fet2\ftnstart1\ftnnar\aftnnar\ftnstart1\aftnstart1\aenddoc\revprop3{\*\rdf}{\info\uc1}\deftab720\viewkind1\paperw11905\paperh16837\margl1440\margr1440\widowctrl
 \sectd\sbknone\colsx360\pgncont\ltrsect
-\pard\plain\ltrpar\ql\s28\itap0{\s28\f0\fs24\ul\lang1043{\*\listtag0}\abinodiroverride\ltrch Opzet eindopdracht Gevorderd Programmeren}{\s28\f0\fs24\ul\lang1043{\*\listtag0}\par}
-\pard\plain\ltrpar\ql\s28\itap0{\s28\f0\fs24\lang1043{\*\listtag0}\par}
-\pard\plain\ltrpar\ql\s28\itap0{\s28\f0\fs24\lang1043{\*\listtag0}\abinodiroverride\ltrch Het basisspel bestaat uit een \uc1\u8218\'82overzicht\uc1\u8217\'92 van een grot, waarin 20 kamers te zien zijn die met elkaar verbonden zijn door middel van gangen. }{\s28\f0\fs24\lang1043{\*\listtag0}\par}
-\pard\plain\ltrpar\ql\s28\itap0{\s28\f0\fs24\lang1043{\*\listtag0}\abinodiroverride\ltrch De Wumpus (het monster dat verslagen moet worden) wordt bij het openen van het spel op een willekeurige tegel geplaatst, waarna de speler opzoek moet naar de Wumpus en hem moet verslaan.}{\s28\f0\fs24\lang1043{\*\listtag0}\par}
-\pard\plain\ltrpar\ql\s28\itap0{\s28\f0\fs24\lang1043{\*\listtag0}\par}
-\pard\plain\ltrpar\ql\s28\itap0{\s28\f0\fs24\lang1043{\*\listtag0}\abinodiroverride\ltrch In verschillende kamers (willekeurig gekozen aan het begin van het spel) liggen goudstukken, putten of vleermuizen verstopt. Wanneer de speler begint te bewegen door middel van de pijltjestoetsen, kan hij meldingen krijgen van wat er in de kamer naast hem ligt, maar hij weet niet welke.}{\s28\f0\fs24\lang1043{\*\listtag0}\par}
-\pard\plain\ltrpar\ql\s28\itap0{\s28\f0\fs24\lang1043{\*\listtag0}\abinodiroverride\ltrch Ondertussen beweegt de Wumpus ook en kiest die telkens de kamer die het dichtst naar de speler toe. }{\s28\f0\fs24\lang1043{\*\listtag0}\par}
-\pard\plain\ltrpar\ql\s28\itap0{\s28\f0\fs24\lang1043{\*\listtag0}\par}
-\pard\plain\ltrpar\ql\s28\itap0{\s28\f0\fs24\lang1043{\*\listtag0}\abinodiroverride\ltrch Wanneer de speler denkt te weten in welke kamer de Wumpus zich bevindt, kan hij door middel van een pijl proberen de Wumpus te raken en uit te schakelen. }{\s28\f0\fs24\lang1043{\*\listtag0}\par}
-\pard\plain\ltrpar\ql\s28\itap0{\s28\f0\fs24\lang1043{\*\listtag0}\par}
-\pard\plain\ltrpar\ql\s28\itap0{\s28\f0\fs24\lang1043{\*\listtag0}\abinodiroverride\ltrch Als de Wumpus geraakt is met een van de pijlen heeft te speler gewonnen, maar wanneer de Wumpus de speler eerder te pakken heeft, verliest de speler. }{\s28\f0\fs24\lang1043{\*\listtag0}\par}}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\ul\lang1043{\*\listtag0}\abinodiroverride\ltrch Opzet eindopdracht Gevorderd Programmeren}{\s28\f0\fs24\ul\lang1043{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\ul\lang1043{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1043{\*\listtag0}\abinodiroverride\ltrch Het basisspel bestaat uit een \uc1\u8218\'82overzicht\uc1\u8217\'92 van een grot, waarin 20 kamers te zien zijn die met elkaar verbonden zijn door middel van gangen. }{\s28\f0\fs24\lang1043{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1043{\*\listtag0}\abinodiroverride\ltrch De Wumpus (het monster dat verslagen moet worden) wordt bij het openen van het spel op een willekeurige tegel geplaatst, waarna de speler opzoek moet naar de Wumpus en hem moet verslaan.}{\s28\f0\fs24\lang1043{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1043{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1043{\*\listtag0}\abinodiroverride\ltrch In verschillende kamers (willekeurig gekozen aan het begin van het spel) liggen goudstukken, putten of vleermuizen verstopt. Wanneer de speler begint te bewegen door middel van de pijltjestoetsen, kan hij meldingen krijgen van wat er in de kamer naast hem ligt, maar hij weet niet welke.}{\s28\f0\fs24\lang1043{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1043{\*\listtag0}\abinodiroverride\ltrch Ondertussen beweegt de Wumpus ook en kiest die telkens de kamer die het dichtst naar de speler toe. }{\s28\f0\fs24\lang1043{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1043{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1043{\*\listtag0}\abinodiroverride\ltrch Wanneer de speler denkt te weten in welke kamer de Wumpus zich bevindt, kan hij door middel van een pijl proberen de Wumpus te raken en uit te schakelen. }{\s28\f0\fs24\lang1043{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1043{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1043{\*\listtag0}\abinodiroverride\ltrch Als de Wumpus geraakt is met een van de pijlen heeft te speler gewonnen, maar wanneer de Wumpus de speler eerder te pakken heeft, verliest de speler. }{\s28\f0\fs24\lang1043{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1043{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1043{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1043{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1043{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1043{\*\listtag0}\abinodiroverride\ltrch ----------------------------------------}{\s28\f0\fs24\lang1043{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1043{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1043{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1043{\*\listtag0}\abinodiroverride\ltrch code-conventies:}{\s28\f0\fs24\lang1043{\*\listtag0}\par}
+{\listtext\pard\fi-430\li720\bullet 	}\pard\plain{\ltrpar\ql\fi-430\li720\s28{\*\abilist\abilistid1005\abilistparentid0\abilistlevel1\abistartat0{\abifieldfont Arial}{\abilistdecimal NULL}{\abilistdelim %L}{\abiliststyle Bullet List}}{\*\pn\pnql\pnstart0\pnlvlblt{\pntxtb\bullet}}\ls1\ilvl0\sl240\slmult1\itap0{\s28\f0\fs24\lang1043{\*\listtag0}\abinodiroverride\ltrch De  namen van de klassen beginnen met een hoofdletter}{\s28\f0\fs24\lang1043{\*\listtag1006}\par}
+}{\listtext\pard\fi-430\li720\bullet 	}\pard\plain{\ltrpar\ql\fi-430\li720\s28{\*\abilist\abilistid1005\abilistlevel1\abistartat0{\abifieldfont Arial}{\abilistdecimal NULL}{\abilistdelim %L}{\abiliststyle Bullet List}}{\*\pn\pnql\pnstart0\pnlvlblt{\pntxtb\bullet}}\ls1\ilvl0\sl240\slmult1\itap0{\s28\f0\fs24\lang1043{\*\listtag0}\abinodiroverride\ltrch De namen van functies beginnen met een kleine letter en als ze uit meer woorden bestaan, worden ze aan elkaar geschreven met een hoofdletter aan het begin van iedere nieuwe naam (voorbeeld: naam1Naam2)}{\s28\f0\fs24\lang1043{\*\listtag1007}\par}
+}{\listtext\pard\fi-430\li720\bullet 	}\pard\plain{\ltrpar\ql\fi-430\li720\s28{\*\abilist\abilistid1005\abilistlevel1\abistartat0{\abifieldfont Arial}{\abilistdecimal NULL}{\abilistdelim %L}{\abiliststyle Bullet List}}{\*\pn\pnql\pnstart0\pnlvlblt{\pntxtb\bullet}}\ls1\ilvl0\sl240\slmult1\itap0{\s28\f0\fs24\lang1043{\*\listtag0}\abinodiroverride\ltrch De variabelen worden geschreven met kleine letters en als de variabele uit meerdere namen bestaat, worden de namen gescheiden door middel van een laag streepje (voorbeeld: naam1_naam2)}{\s28\f0\fs24\lang1043{\*\listtag1008}\par}
+}{\listtext\pard\fi-430\li720\bullet 	}\pard\plain{\ltrpar\ql\fi-430\li720\s28{\*\abilist\abilistid1005\abilistlevel1\abistartat0{\abifieldfont Arial}{\abilistdecimal NULL}{\abilistdelim %L}{\abiliststyle Bullet List}}{\*\pn\pnql\pnstart0\pnlvlblt{\pntxtb\bullet}}\ls1\ilvl0\sl240\slmult1\itap0{\s28\f0\fs24\lang1043{\*\listtag0}\abinodiroverride\ltrch Voor het inspringen worden vier spaties gebruikt}{\s28\f0\fs24\lang1043{\*\listtag1009}\par}
+}{\listtext\pard\fi-430\li720\bullet 	}\pard\plain{\ltrpar\ql\fi-430\li720\s28{\*\abilist\abilistid1005\abilistlevel1\abistartat0{\abifieldfont Arial}{\abilistdecimal NULL}{\abilistdelim %L}{\abiliststyle Bullet List}}{\*\pn\pnql\pnstart0\pnlvlblt{\pntxtb\bullet}}\ls1\ilvl0\sl240\slmult1\itap0{\s28\f0\fs24\lang1043{\*\listtag1010}\par}}}
