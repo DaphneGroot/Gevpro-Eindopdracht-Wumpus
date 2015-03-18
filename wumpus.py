@@ -7,6 +7,13 @@ from random import *
 from collections import namedtuple
 from PyQt4 import QtGui, QtCore
 
+from random import randrange
+from collections import namedtuple
+from PyQt4 import QtGui, QtCore
+
+from Wumpus_bewegen import Bewegen
+from mc import Mc
+
 classic_5x4 = ["es","esw","esw","esw","sw","nes","nesw","nesw","nesw","nsw","nes","nesw","nesw","nesw","nsw","ne","new","new","new","nw"]
 black_5x4 = ["black","black","black","black","black","black","black","black","black","black","black","black","black","black","black","black","black","black","black","black",]
 #You can create a field by making a list of 20 tile names (5x4), and setting the properties of the names in Tile().setType(name). The tiles' order is first from left to right and then from top to bottom:
@@ -122,6 +129,7 @@ class GameField(QtGui.QWidget):
         self.placeWumpus()
         
 
+
     def initUI(self, level):
         self.width = 5
         self.height = 4
@@ -130,22 +138,53 @@ class GameField(QtGui.QWidget):
 
         self.setGeometry(200,0,self.width*100,self.height*100)
         
+
+        self.size = self.width*self.height
+        self.field = level
+
+        self.setGeometry(200,0,self.width*100,self.height*100)
+
+        #- Create list with positions 0,0-4,4 -#
         positions = []
         for y in range(self.height):
             for x in range(self.width):
                 positions.append(XY(x,y)) 
+
         
         self.tile_dic = {}
         for i in range(self.seize):
             self.tile_dic[positions[i]] = Tile(self, self.field[i], positions[i])
             
+
+
+        #- Create tiles in dictionary with positions and selected level -#
+        self.tile_dic = {}
+        for i in range(self.size):
+            self.tile_dic[positions[i]] = Tile(self, self.field[i], positions[i])
+
+        #- Place tiles correctly in field and save center coordinates -#
         for key in self.tile_dic:
             o = self.tile_dic[key]
             o.setGeometry(o.position.x*100, o.position.y*100, 100, 100)
             o.findCenter()
 
+
         print(self.tile_dic[(4,3)].center)#Test function, this is how you get the center of a 'coordinate'
         print(self.tile_dic[(4,3)].W_open)#Test function, this is how you can see if that direction is open for Jack and Wumpus (True) or if there's a wall (False)
+
+        #print(self.tile_dic[(4,3)].center) Test function, this is how you get the center of a 'coordinate'
+        #print(self.tile_dic[(4,3)].W_open) Test function, this is how you can see if that direction is open for Jack and Wumpus (True) or if there's a wall (False)
+
+        #- Initialize positions items, player and wumpus -#
+        self.placeItemsRandomly()
+        self.position_wumpus = self.placeWumpusRandomly()
+        initial_player_position = self.placePlayerRandomly(True)
+
+        #- Intergrate mc.py -#
+        self.player = Mc()
+        self.player.mc_coords = [initial_player_position.x, initial_player_position.y]
+        self.player.tile_width = 1
+        print(self.tile_dic[(self.player.mc_coords[0],self.player.mc_coords[1])].center)
         
     def placeItemsRandomly(self):
         new_gold_amount = 5
@@ -271,6 +310,21 @@ class GameField(QtGui.QWidget):
             pixlabel_wumpus_original.setPixmap(pixmap_wumpusOriginal)
             pixlabel_wumpus_original.move(coordinates_wumpus_list[i][0]-17.5,coordinates_wumpus_list[i][1]-24)
             pixlabel_wumpus_original.show()
+
+
+    def placeWumpusRandomly(self):
+        return XY(randrange(self.width),randrange(self.height))
+
+    def placePlayerRandomly(self, avoid_obstacles):
+        if avoid_obstacles:
+            available_positions = []
+            for key in self.tile_dic:
+                o = self.tile_dic[key]
+                if not (o.bats or o.hole or o.gold or o.position == self.position_wumpus):
+                    available_positions.append(o.position)
+            return available_positions[randrange(len(available_positions))]
+        else:
+            return XY(randrange(self.width),randrange(self.height))
         
 #============================================================================================
 
@@ -296,7 +350,9 @@ class Tile(QtGui.QWidget):
                 self.hole = True
         else:
                 pass
-        
+
+
+
     def removeItem(self, item):#item is: bats, hole, gold
         if item == "bats":
                 self.bats = False
