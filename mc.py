@@ -33,9 +33,9 @@ class Mc (QtGui.QWidget):
         """ Assign mc attributes. """
         
         self.mc_walking    = False
-        self.tile_width    = 10
+        self.tile_width    = 20
         self.space_pressed = False
-        self.mc_coords     = [10, 10] #---> change default player coordinates to random
+        self.mc_coords     = [20, 20] #---> change default player coordinates to random
 
         self.pixmap   = QtGui.QPixmap("mc_ph.png")
         self.mc_view  = McView(self)
@@ -49,14 +49,14 @@ class Mc (QtGui.QWidget):
     def keyPressEvent(self, e):
         """ Define actions for all key press events. """
 
-        if self.mc_walking == False:
+        if self.mc_walking == False: # no input allowed while mc is walking
             #--- left arrow --#
             if e.key() == QtCore.Qt.Key_Left:
                 print("--Left Arrow")
                 
                 if self.space_pressed == False:
                     self.mc_walking = True
-                    self.animateMc(0)
+                    self.animateMc(0, -1)
                 else:
                     # move arrow position
                     pass
@@ -68,8 +68,8 @@ class Mc (QtGui.QWidget):
                 print("--Right Arrow")
                 
                 if self.space_pressed == False:
-                    self.mc_coords[0] += self.tile_width
-                    self.moveMc()
+                    self.mc_walking = True
+                    self.animateMc(0, 1)
                 else:
                     # move arrow position
                     pass
@@ -81,8 +81,8 @@ class Mc (QtGui.QWidget):
                 print("--Up Arrow")
             
                 if self.space_pressed == False:
-                    self.mc_coords[1] -= self.tile_width
-                    self.moveMc()
+                    self.mc_walking = True
+                    self.animateMc(1, -1)
                 else:
                     # move arrow position
                     pass
@@ -94,8 +94,8 @@ class Mc (QtGui.QWidget):
                 print("--Down Arrow")
                 
                 if self.space_pressed == False:
-                    self.mc_coords[1] += self.tile_width
-                    self.moveMc()
+                    self.mc_walking = True
+                    self.animateMc(1, 1)
                 else:
                     # move arrow position
                     pass
@@ -124,24 +124,17 @@ class Mc (QtGui.QWidget):
         else:
             pass
 
-    def animateMc(self, direction):
+    def animateMc(self, l_or_r, u_or_d):
         self.stepcounter = 0
         while self.mc_walking == True:
-            time.sleep(0.5)
-            self.mc_coords[direction] -= 1
+            time.sleep(0.02)
+            self.mc_coords[l_or_r] += u_or_d
             self.stepcounter += 1
             self.mc_char.setOffset(self.mc_coords[0], self.mc_coords[1])
-            self.mc_view.centerOn(self.mc_coords[0], self.mc_coords[1])
             #self.moveMc()
+            QtGui.QApplication.processEvents()
             if self.stepcounter == self.tile_width:
                 self.mc_walking = False
-        # animation = QGraphicsItemAnimation(self)
-        # timeline = QTimeLine(1000)
-        # timeline.setFrameRange(0,100)
-        # animation.setTimeLine(timeline)
-        # animation.setItem(self.mc_char)
-        # animation.setPosAt(1.0, QPointF(self.mc_char.x()+10,self.mc_char.y()))
-        # timeline.start()
         
     def moveMc(self):
         print('moving')
