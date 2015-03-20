@@ -158,7 +158,9 @@ class SideBar(QtGui.QWidget):
 		
         print("Messages sent")
 
-        
+                
+        label_gold = QtGui.QLabel('GOUD')
+        label_gold.show()
         
 
 class GameField(QtGui.QWidget):
@@ -218,6 +220,10 @@ class GameField(QtGui.QWidget):
 
         #- Create player -#
         self.player = Mc(self, initial_player_position)
+        print("mc_coords ", self.player.mc_coords)
+        print("mc_position ", self.player.mc_position)
+        #print(self.tile_dic[(self.player.mc_coords[0],self.player.mc_coords[1])].center)
+
         
         
         
@@ -261,9 +267,12 @@ class GameField(QtGui.QWidget):
             coordinates_wumpus_list.append(coordinates_wumpus)
             
         else:
-            coordinates_wumpus = (randrange(50,450,100),randrange(100,350,100))
+            self.position_wumpus = XY(randrange(self.width),randrange(self.height))
+            print("Originele positie Wumpus nieuw: ",self.position_wumpus)
+            coordinates_wumpus = [self.position_wumpus.x*100+49, self.position_wumpus.y*100+49]
+            print("Originele coordinaten Wumpus nieuw: ",coordinates_wumpus,"\n")
             coordinates_wumpus_list.append(coordinates_wumpus)
-            print("Originele coordinaten Wumpus: ",coordinates_wumpus)
+        
         
         
         """Calculates the coordinates of the Wumpus' new location"""
@@ -272,7 +281,6 @@ class GameField(QtGui.QWidget):
         
         #checks if x or y coordinates aren't the same for the player and the Wumpus
         if self.player.mc_coords[0] != coordinates_wumpus[0] and self.player.mc_coords[1] != coordinates_wumpus[1]:
-            
             if self.player.mc_coords[0] > coordinates_wumpus[0] and self.player.mc_coords[1] > coordinates_wumpus[1]:
                 posible_coordinates_wumpus.append((coordinates_wumpus[0]+100,coordinates_wumpus[1]))
                 posible_coordinates_wumpus.append((coordinates_wumpus[0],coordinates_wumpus[1]+100))
@@ -336,8 +344,11 @@ class GameField(QtGui.QWidget):
 
     def placeWumpusRandomly(self):
         #random original position of Wumpus
-        coordinates_wumpus = (randrange(50,450,100),randrange(50,350,100))
-        print("Originele coordinaten Wumpus: ",coordinates_wumpus)
+        self.position_wumpus = XY(randrange(self.width),randrange(self.height))
+        print("Originele positie Wumpus: ",self.position_wumpus)
+        coordinates_wumpus = [self.position_wumpus.x*100+49, self.position_wumpus.y*100+49]
+        print("Originele coordinaten Wumpus: ",coordinates_wumpus,"\n")
+        
         return coordinates_wumpus
 
 
