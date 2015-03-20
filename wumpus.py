@@ -126,7 +126,16 @@ class GameField(QtGui.QWidget):
 
         self.initUI(level)
         self.placeItemsRandomly()
-        self.placeWumpus()
+        
+        coordinates_wumpus = self.placeWumpusRandomly()
+        coordinates_wumpus_list_move = self.placeWumpus(coordinates_wumpus)
+        
+        print(coordinates_wumpus_list_move)
+#        coordinates_player = ....
+        
+#        while coordinates_player != coordinates_wumpus:
+#            self.turnTaking(coordinates_wumpus)
+
         
 
 
@@ -213,9 +222,27 @@ class GameField(QtGui.QWidget):
                         
                         
                         
-    def placeWumpus(self):
-        """Wumpus is placed into the field"""
+                        
+                        
+                        
+                        
+#    def turnTaking(self,coordinates_wumpus):
+#        if speler just moved:
+#            self.placeWumpus(coordinates_wumpus)
+#            
+#        else:
+#            self.placePlayer()
         
+        
+        
+        
+        
+        
+        
+        
+                        
+    def placeWumpus(self,coordinates_wumpus):
+        """Wumpus is placed into the field"""
         coordinates_player_list = []
         coordinates_wumpus_list = []
         coordinates_wumpus_list_move = []
@@ -224,9 +251,6 @@ class GameField(QtGui.QWidget):
         coordinates_player = (randrange(50,450,100),randrange(50,350,100))
         print("coordinaten speler: ",coordinates_player)
         
-        #random original position of Wumpus
-        coordinates_wumpus = (randrange(50,450,100),randrange(50,350,100))
-        print("Originele coordinaten Wumpus: ",coordinates_wumpus)
         
         #check if position Player isn't the same as position Wumpus
         if coordinates_player != coordinates_wumpus:
@@ -310,10 +334,17 @@ class GameField(QtGui.QWidget):
             pixlabel_wumpus_original.setPixmap(pixmap_wumpusOriginal)
             pixlabel_wumpus_original.move(coordinates_wumpus_list[i][0]-17.5,coordinates_wumpus_list[i][1]-24)
             pixlabel_wumpus_original.show()
+            
+        return coordinates_wumpus_list_move
+
 
 
     def placeWumpusRandomly(self):
-        return XY(randrange(self.width),randrange(self.height))
+        #random original position of Wumpus
+        coordinates_wumpus = (randrange(50,450,100),randrange(50,350,100))
+        print("Originele coordinaten Wumpus: ",coordinates_wumpus)
+        return coordinates_wumpus
+
 
     def placePlayerRandomly(self, avoid_obstacles):
         if avoid_obstacles:
