@@ -77,6 +77,15 @@ class GameScreen(QtGui.QWidget):
     def quitGame(self):
         self.parent.toStartScreen()
         self.close()
+        
+    def gameOver(self, result, gold):
+        self.parent.toEndScreen(result, gold)
+        self.close()
+        
+    def endTurn(self):
+        print("Einde beurt")
+        self.gamefield.player.updateMcPosition()
+        print(self.gamefield.player.mc_position)
 
 class EndScreen(QtGui.QWidget):
     """Generates end screen"""
@@ -123,6 +132,7 @@ class GameField(QtGui.QWidget):
 
     def __init__(self, parent, level):
         super(GameField, self).__init__(parent)
+        self.parent = parent
 
         self.initUI(level)
         self.placeItemsRandomly()
@@ -150,13 +160,10 @@ class GameField(QtGui.QWidget):
             for x in range(self.width):
                 positions.append(XY(x,y)) 
 
-        
         self.tile_dic = {}
         for i in range(self.seize):
             self.tile_dic[positions[i]] = Tile(self, self.field[i], positions[i])
             
-
-
         #- Create tiles in dictionary with positions and selected level -#
         self.tile_dic = {}
         for i in range(self.size):
@@ -168,22 +175,13 @@ class GameField(QtGui.QWidget):
             o.setGeometry(o.position.x*100, o.position.y*100, 100, 100)
             o.findCenter()
 
-
-        print(self.tile_dic[(4,3)].center)#Test function, this is how you get the center of a 'coordinate'
-        print(self.tile_dic[(4,3)].W_open)#Test function, this is how you can see if that direction is open for Jack and Wumpus (True) or if there's a wall (False)
-
-        #print(self.tile_dic[(4,3)].center) Test function, this is how you get the center of a 'coordinate'
-        #print(self.tile_dic[(4,3)].W_open) Test function, this is how you can see if that direction is open for Jack and Wumpus (True) or if there's a wall (False)
-
         #- Initialize positions items, player and wumpus -#
         self.placeItemsRandomly()
         self.position_wumpus = self.placeWumpusRandomly()
         initial_player_position = self.placePlayerRandomly(True)
 
-        #- Intergrate mc.py -#
+        #- Create player -#
         self.player = Mc(self, initial_player_position)
-        print(self.player.mc_coords)
-        #print(self.tile_dic[(self.player.mc_coords[0],self.player.mc_coords[1])].center)
         
     def placeItemsRandomly(self):
         new_gold_amount = 5
@@ -475,9 +473,6 @@ def main():
     app = QtGui.QApplication(sys.argv)
     window = Window()
     sys.exit(app.exec_())
-    
-    
-    
     
 
 if __name__ == "__main__":

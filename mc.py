@@ -51,7 +51,6 @@ class Mc (QtGui.QWidget):
         
     def keyPressEvent(self, e):
         """ Define actions for all key press events. """
-        self.updateMcPosition()
 
         if self.mc_walking == False: # no input allowed while mc is walking
             #--- left arrow --#
@@ -61,6 +60,7 @@ class Mc (QtGui.QWidget):
                 if self.space_pressed == False and self.parent.tile_dic[self.mc_position].W_open:
                     self.mc_walking = True
                     self.animateMc(0, -1)
+                    self.parent.parent.endTurn()
                 else:
                     # move arrow position
                     pass
@@ -74,6 +74,7 @@ class Mc (QtGui.QWidget):
                 if self.space_pressed == False and self.parent.tile_dic[self.mc_position].E_open:
                     self.mc_walking = True
                     self.animateMc(0, 1)
+                    self.parent.parent.endTurn()
                 else:
                     # move arrow position
                     pass
@@ -87,6 +88,7 @@ class Mc (QtGui.QWidget):
                 if self.space_pressed == False and self.parent.tile_dic[self.mc_position].N_open:
                     self.mc_walking = True
                     self.animateMc(1, -1)
+                    self.parent.parent.endTurn()
                 else:
                     # move arrow position
                     pass
@@ -100,6 +102,7 @@ class Mc (QtGui.QWidget):
                 if self.space_pressed == False and self.parent.tile_dic[self.mc_position].S_open:
                     self.mc_walking = True
                     self.animateMc(1, 1)
+                    self.parent.parent.endTurn()
                 else:
                     # move arrow position
                     pass
@@ -125,6 +128,8 @@ class Mc (QtGui.QWidget):
                 if self.space_pressed == True:
                     self.space_pressed = False
                     print("Arrow shot")
+                    self.parent.parent.endTurn()
+            
         else:
             pass
 
