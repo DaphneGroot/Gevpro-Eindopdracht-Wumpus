@@ -85,7 +85,7 @@ class GameScreen(QtGui.QWidget):
     def endTurn(self):
         print("Einde beurt")
         self.gamefield.player.updateMcPosition()
-        print(self.gamefield.player.mc_position)
+        self.sidebar.sendMessages(self.gamefield.player.mc_position, self.gamefield.tile_dic)
 
 class EndScreen(QtGui.QWidget):
     """Generates end screen"""
@@ -126,6 +126,37 @@ class SideBar(QtGui.QWidget):
         self.setGeometry(0,0,200,400)
         self.quitbutton = QtGui.QPushButton("Quit", self)
         self.quitbutton.clicked.connect(self.parent.quitGame)
+        
+    def sendMessages(self, player_position, tile_dic):
+        wumpus_present = False # ---> Boolean, Wumpus present around player or not
+        bats_present = False
+        hole_present = False
+        gold_present = False
+        
+        surrounding_tiles = [(int(player_position[0]), int(player_position[1])-1),(int(player_position[0]), int(player_position[1])+1),(int(player_position[0]-1), int(player_position[1])),(int(player_position[0]+1), int(player_position[1]))]
+        surrounding_tiles = [tile for tile in surrounding_tiles if tile in tile_dic]
+        
+        for pos in surrounding_tiles:
+            if tile_dic[pos].bats:
+                bats_present = True
+            if tile_dic[pos].hole:
+                hole_present = True
+            if tile_dic[pos].gold:
+                gold_present = True
+		
+        if wumpus_present:
+            print("Wumpus around")
+			
+        if bats_present:
+            print("Bats around")
+
+        if hole_present:
+            print("Hole around")
+		
+        if gold_present:
+            print("Gold around")
+		
+        print("Messages sent")
 
         
         
