@@ -181,10 +181,9 @@ class GameField(QtGui.QWidget):
         initial_player_position = self.placePlayerRandomly(True)
 
         #- Intergrate mc.py -#
-        self.player = Mc()
-        self.player.mc_coords = [initial_player_position.x, initial_player_position.y]
-        self.player.tile_width = 1
-        print(self.tile_dic[(self.player.mc_coords[0],self.player.mc_coords[1])].center)
+        self.player = Mc(self, initial_player_position)
+        print(self.player.mc_coords)
+        #print(self.tile_dic[(self.player.mc_coords[0],self.player.mc_coords[1])].center)
         
     def placeItemsRandomly(self):
         new_gold_amount = 5
@@ -209,9 +208,7 @@ class GameField(QtGui.QWidget):
                         new_hole_amount = new_hole_amount - 1
                 elif new_bats_amount > 0:
                         self.tile_dic[position].setItem("bats")
-                        new_bats_amount = new_bats_amount - 1
-                        
-                        
+                        new_bats_amount = new_bats_amount - 1                
                         
     def placeWumpus(self):
         """Wumpus is placed into the field"""
@@ -310,7 +307,6 @@ class GameField(QtGui.QWidget):
             pixlabel_wumpus_original.setPixmap(pixmap_wumpusOriginal)
             pixlabel_wumpus_original.move(coordinates_wumpus_list[i][0]-17.5,coordinates_wumpus_list[i][1]-24)
             pixlabel_wumpus_original.show()
-
 
     def placeWumpusRandomly(self):
         return XY(randrange(self.width),randrange(self.height))
