@@ -23,12 +23,8 @@ class Mc (QtGui.QWidget):
         self.initUI()
         
     def initUI(self):
-        #--- simple placeholder - to be changed ---#
         self.controlMc()
-        
-        #self.setWindowTitle("Test")
         self.setGeometry(0, 0, 500, 400)
-        #self.show()
         
     def controlMc(self):
         """ Assign mc attributes. """
@@ -38,6 +34,7 @@ class Mc (QtGui.QWidget):
         self.times_arrow_moved = 0
         self.tile_width        = 100
         self.space_pressed     = False
+        self.arrow_path        = []
 
         self.pixmap   = QtGui.QPixmap("mc_ph.png")
         self.mc_view  = McView(self)
@@ -128,6 +125,7 @@ class Mc (QtGui.QWidget):
                 if self.space_pressed == True:
                     self.space_pressed = False
                     self.initializeArrow(False) # remove arrow
+                    self.arrow_path    = [] # remove content arrow_path
                     print("Arrow canceled")
                 else:
                     self.space_pressed = True
@@ -141,11 +139,14 @@ class Mc (QtGui.QWidget):
                 print("--Return")
                 if self.space_pressed == True:
                     self.space_pressed = False
+                    #print(self.arrow_path)
+                    self.arrow_path    = [] # remove content arrow_path
                     print("Arrow shot")
                     self.parent.parent.endTurn()
             
 
     def animateMc(self, x_or_y, direction):
+        """Moves the player to new position"""
         self.stepcounter = 0
         while self.mc_walking == True:
             time.sleep(0.01)
@@ -157,6 +158,7 @@ class Mc (QtGui.QWidget):
                 self.mc_walking = False
 
     def animateArrow(self, x_or_y, direction):
+        """Moves the arrow to new position"""
         self.stepcounter = 0        
         while self.arrow_shooting == True:    
             time.sleep(0.01)
@@ -165,9 +167,11 @@ class Mc (QtGui.QWidget):
             self.arrow.setPos(self.arrow_coords[0], self.arrow_coords[1]) # change arrow position to new coordinates
             QtGui.QApplication.processEvents() # needed to update gui, normally won"t update during loop
             if self.stepcounter == self.tile_width: # stop loop when the arrow has traveled the length of one tile
+                self.arrow_path.append(self.arrow_coords[:])
                 self.arrow_shooting = False
                 
     def initializeArrow(self, create_arrow):
+        """Creates and deletes arrow upon pressing space"""
         self.times_arrow_moved = 0
         if create_arrow == True:
             self.arrow_pixmap = QtGui.QPixmap("images/arrow.png")
@@ -176,13 +180,13 @@ class Mc (QtGui.QWidget):
             self.arrow_coords = self.mc_coords[:] # copy mc coordinates
             self.arrow.setPos(self.arrow_coords[0], self.arrow_coords[1])
         else:
-            # needs to remove arrow
-            self.mc_scene.removeItem(self.arrow)
-            pass
+            self.mc_scene.removeItem(self.arrow) # deletes arrow
         
-    def moveArrow(self, key):        
+    def moveArrow(self, key):
+        """Rotate arrow to match movement direction"""
         if self.times_arrow_moved >= 5:
             self.arrow_shooting = False
+            self.arrow_path    = [] # remove content arrow_path
             print("Arrow too far, can't move any further")
         else:
             self.times_arrow_moved += 1
