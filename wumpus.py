@@ -11,7 +11,7 @@ from random import randrange
 from collections import namedtuple
 from PyQt4 import QtGui, QtCore
 
-from Wumpus_bewegen import Bewegen
+
 from mc import Mc
 
 classic_5x4 = ["es","esw","esw","esw","sw","nes","nesw","nesw","nesw","nsw","nes","nesw","nesw","nesw","nsw","ne","new","new","new","nw"]
@@ -88,13 +88,13 @@ class GameScreen(QtGui.QWidget):
         self.sidebar.sendMessages(self.gamefield.player.mc_position, self.gamefield.tile_dic)
         
         coordinates_wumpus = GameField.coordinates_wumpus_list_move
+        print("coordinates_wumpus | endTurn", coordinates_wumpus)
         GameField.placeWumpus(self,coordinates_wumpus)
         
 
 
 class EndScreen(QtGui.QWidget):
     """Generates end screen"""
-
     def __init__(self, parent, result, gold):
         super(EndScreen, self).__init__(parent)
         self.parent = parent
@@ -221,8 +221,8 @@ class GameField(QtGui.QWidget):
 
         #- Initialize positions items, player and wumpus -#
         self.placeItemsRandomly()
-        self.position_wumpus = self.placeWumpusRandomly()
-        GameField.coordinates_wumpus_original = self.placeWumpusRandomly()
+        GameField.coordinates_wumpus_list_move = self.placeWumpusRandomly()
+        print("GameField.coordinates_wumpus_list_move", GameField.coordinates_wumpus_list_move)
         initial_player_position = self.placePlayerRandomly(True)
         
         
@@ -230,14 +230,13 @@ class GameField(QtGui.QWidget):
         #- Create player -#
         GameField.player = Mc(self, initial_player_position)
         print("mc_coords ", GameField.player.mc_coords)
-        print("mc_position ", GameField.player.mc_position)
         #print(self.tile_dic[(GameField.player.mc_coords[0],GameField.player.mc_coords[1])].center)
         
         
         
         #place Wumpus
-        print("GameField.coordinates_wumpus_original", GameField.coordinates_wumpus_original)
-        GameField.coordinates_wumpus = self.placeWumpus(GameField.coordinates_wumpus_original)
+        #print("GameField.coordinates_wumpus_original", GameField.coordinates_wumpus_original)
+        #GameField.coordinates_wumpus = self.placeWumpus(GameField.coordinates_wumpus_original)
 
         
         
@@ -276,6 +275,8 @@ class GameField(QtGui.QWidget):
         coordinates_wumpus_list = []
         coordinates_wumpus_list_move = []
         
+        print("palecWumpus coordinates_wumpus: ", coordinates_wumpus)
+        
         
         #check if position Player isn't the same as position Wumpus
         if GameField.player.mc_coords != coordinates_wumpus:
@@ -283,28 +284,21 @@ class GameField(QtGui.QWidget):
             
         else:
             self.position_wumpus = XY(randrange(self.width),randrange(self.height))
-            print("Originele positie Wumpus nieuw: ",self.position_wumpus)
             coordinates_wumpus = [self.position_wumpus.x*100+49, self.position_wumpus.y*100+49]
-            print("Originele coordinaten Wumpus nieuw: ",coordinates_wumpus,"\n")
+            print("Originele coordinaten Wumpus nieuw: ",coordinates_wumpus)
             coordinates_wumpus_list.append(coordinates_wumpus)
         
         
         
         """Calculates the coordinates of the Wumpus' new location"""
         posible_coordinates_wumpus = []
-        
-        
-        print("coordinates_wumpus 2", coordinates_wumpus)        
-        
+       
         for element in range(len(coordinates_wumpus)):
-            print(element)
             coordinates_wumpus_X = coordinates_wumpus[element][0]
             coordinates_wumpus_Y = coordinates_wumpus[element][1]
-            print("coordinates_wumpus 2 X", coordinates_wumpus[element][0])
-            print("coordinates_wumpus 2 Y", coordinates_wumpus[element][1])
             
             
-        print("GameField.player.mc_coords 2", GameField.player.mc_coords)
+        print("GameField.player.mc_coords 2:", GameField.player.mc_coords)
         
         #checks if x or y coordinates aren't the same for the player and the Wumpus
         if GameField.player.mc_coords[0] != coordinates_wumpus_X and GameField.player.mc_coords[1] != coordinates_wumpus_Y:
@@ -340,21 +334,21 @@ class GameField(QtGui.QWidget):
                 
         #Picks the new spot of the Wumpus out an list with the options
         coordinates_wumpus_move = choice(posible_coordinates_wumpus)
-        print("Verplaatste coordinaten Wumpus: ",coordinates_wumpus_move, "\n")
-        coordinates_wumpus_move = coordinates_wumpus_move[0],coordinates_wumpus_move[1]
-        print("Verplaatste coordinaten Wumpus 2: ",coordinates_wumpus_move, "\n")
-        
-        coordinates_wumpus_list_move.append(coordinates_wumpus_move)            
+        print("Verplaatste coordinaten Wumpus | coordinates_wumpus_move: ",coordinates_wumpus_move)
+        coordinates_wumpus_list_move.append(coordinates_wumpus_move)
+        print("Verplaatste coordinaten Wumpus | coordinates_wumpus_list_move: ",coordinates_wumpus_list_move)
             
             
-        """Makes the circles which represent the player, the Wumpus where it is when it moved and the original spot of the Wumpus"""
+        """Makes images of Wumpus and the last position of the Wumpus"""
         #picture Wumpus Moved
         pixmap_wumpus = QtGui.QPixmap("images/wumpus.png")
         pixlabel_wumpus = QtGui.QLabel(self)
         pixlabel_wumpus.setPixmap(pixmap_wumpus)
         pixlabel_wumpus.move(coordinates_wumpus_list_move[0][0]-17.5,coordinates_wumpus_list_move[0][1]-24)
         pixlabel_wumpus.show()
-
+        
+        
+        print("Laatste coordinaten Wumpus | coordinates_wumpus_list: ",coordinates_wumpus_list)
 
         #picture Wumpus original         
         pixmap_wumpusOriginal = QtGui.QPixmap("images/monsterOriginalSpot.jpg")
@@ -376,9 +370,16 @@ class GameField(QtGui.QWidget):
     def placeWumpusRandomly(self):
         #random original position of Wumpus
         self.position_wumpus = XY(randrange(self.width),randrange(self.height))
-        print("Originele positie Wumpus: ",self.position_wumpus)
         coordinates_wumpus = [(self.position_wumpus.x*100+49, self.position_wumpus.y*100+49)]
-        print("Originele coordinaten Wumpus: ",coordinates_wumpus,"\n")
+        print("Originele coordinaten Wumpus: ",coordinates_wumpus)
+        
+        
+        #picture Wumpus original         
+        pixmap_wumpusOriginal = QtGui.QPixmap("images/monsterOriginalSpot.jpg")
+        pixlabel_wumpus_original = QtGui.QLabel(self)
+        pixlabel_wumpus_original.setPixmap(pixmap_wumpusOriginal)
+        pixlabel_wumpus_original.move(coordinates_wumpus[0][0]-17.5,coordinates_wumpus[0][1]-24)
+        pixlabel_wumpus_original.show()
         
         return coordinates_wumpus
 
