@@ -86,6 +86,11 @@ class GameScreen(QtGui.QWidget):
         print("Einde beurt")
         self.gamefield.player.updateMcPosition()
         self.sidebar.sendMessages(self.gamefield.player.mc_position, self.gamefield.tile_dic)
+        
+        coordinates_wumpus = GameField.coordinates_wumpus_list_move
+        GameField.placeWumpus(self,coordinates_wumpus)
+        
+
 
 class EndScreen(QtGui.QWidget):
     """Generates end screen"""
@@ -127,6 +132,8 @@ class SideBar(QtGui.QWidget):
         self.quitbutton = QtGui.QPushButton("Quit", self)
         self.quitbutton.clicked.connect(self.parent.quitGame)
         
+        
+        
     def sendMessages(self, player_position, tile_dic):
         wumpus_present = False # ---> Boolean, Wumpus present around player or not
         bats_present = False
@@ -143,7 +150,7 @@ class SideBar(QtGui.QWidget):
                 hole_present = True
             if tile_dic[pos].gold:
                 gold_present = True
-		
+                
         if wumpus_present:
             print("Wumpus around")
 			
@@ -172,10 +179,6 @@ class GameField(QtGui.QWidget):
 
         self.initUI(level)
         self.placeItemsRandomly()
-        
-        coordinates_wumpus = self.placeWumpusRandomly()
-        coordinates_wumpus_list_move = self.placeWumpus(coordinates_wumpus)
-        
 
 
     def initUI(self, level):
@@ -191,6 +194,7 @@ class GameField(QtGui.QWidget):
         self.field = level
 
         self.setGeometry(200,0,self.width*100,self.height*100)
+
 
         #- Create list with positions 0,0-4,4 -#
         positions = []
@@ -213,16 +217,27 @@ class GameField(QtGui.QWidget):
             o.setGeometry(o.position.x*100, o.position.y*100, 100, 100)
             o.findCenter()
 
+
+
         #- Initialize positions items, player and wumpus -#
         self.placeItemsRandomly()
         self.position_wumpus = self.placeWumpusRandomly()
+        GameField.coordinates_wumpus_original = self.placeWumpusRandomly()
         initial_player_position = self.placePlayerRandomly(True)
+        
+        
 
         #- Create player -#
-        self.player = Mc(self, initial_player_position)
-        print("mc_coords ", self.player.mc_coords)
-        print("mc_position ", self.player.mc_position)
-        #print(self.tile_dic[(self.player.mc_coords[0],self.player.mc_coords[1])].center)
+        GameField.player = Mc(self, initial_player_position)
+        print("mc_coords ", GameField.player.mc_coords)
+        print("mc_position ", GameField.player.mc_position)
+        #print(self.tile_dic[(GameField.player.mc_coords[0],GameField.player.mc_coords[1])].center)
+        
+        
+        
+        #place Wumpus
+        print("GameField.coordinates_wumpus_original", GameField.coordinates_wumpus_original)
+        GameField.coordinates_wumpus = self.placeWumpus(GameField.coordinates_wumpus_original)
 
         
         
@@ -263,7 +278,7 @@ class GameField(QtGui.QWidget):
         
         
         #check if position Player isn't the same as position Wumpus
-        if self.player.mc_coords != coordinates_wumpus:
+        if GameField.player.mc_coords != coordinates_wumpus:
             coordinates_wumpus_list.append(coordinates_wumpus)
             
         else:
@@ -279,46 +294,57 @@ class GameField(QtGui.QWidget):
         posible_coordinates_wumpus = []
         
         
+        print("coordinates_wumpus 2", coordinates_wumpus)        
+        
+        for element in range(len(coordinates_wumpus)):
+            print(element)
+            coordinates_wumpus_X = coordinates_wumpus[element][0]
+            coordinates_wumpus_Y = coordinates_wumpus[element][1]
+            print("coordinates_wumpus 2 X", coordinates_wumpus[element][0])
+            print("coordinates_wumpus 2 Y", coordinates_wumpus[element][1])
+            
+            
+        print("GameField.player.mc_coords 2", GameField.player.mc_coords)
+        
         #checks if x or y coordinates aren't the same for the player and the Wumpus
-        if self.player.mc_coords[0] != coordinates_wumpus[0] and self.player.mc_coords[1] != coordinates_wumpus[1]:
-            if self.player.mc_coords[0] > coordinates_wumpus[0] and self.player.mc_coords[1] > coordinates_wumpus[1]:
-                posible_coordinates_wumpus.append((coordinates_wumpus[0]+100,coordinates_wumpus[1]))
-                posible_coordinates_wumpus.append((coordinates_wumpus[0],coordinates_wumpus[1]+100))
+        if GameField.player.mc_coords[0] != coordinates_wumpus_X and GameField.player.mc_coords[1] != coordinates_wumpus_Y:
+            if GameField.player.mc_coords[0] > coordinates_wumpus_X and GameField.player.mc_coords[1] > coordinates_wumpus_Y:
+                posible_coordinates_wumpus.append((coordinates_wumpus_X+100,coordinates_wumpus_Y))
+                posible_coordinates_wumpus.append((coordinates_wumpus_X,coordinates_wumpus_Y+100))
                 
-            elif self.player.mc_coords[0] > coordinates_wumpus[0] and self.player.mc_coords[1] < coordinates_wumpus[1]:
-                posible_coordinates_wumpus.append((coordinates_wumpus[0]+100,coordinates_wumpus[1]))
-                posible_coordinates_wumpus.append((coordinates_wumpus[0],coordinates_wumpus[1]-100))
+            elif GameField.player.mc_coords[0] > coordinates_wumpus_X and GameField.player.mc_coords[1] < coordinates_wumpus_Y:
+                posible_coordinates_wumpus.append((coordinates_wumpus_X+100,coordinates_wumpus_Y))
+                posible_coordinates_wumpus.append((coordinates_wumpus_X,coordinates_wumpus_Y-100))
                 
-            elif self.player.mc_coords[0] < coordinates_wumpus[0] and self.player.mc_coords[1] > coordinates_wumpus[1]:
-                posible_coordinates_wumpus.append((coordinates_wumpus[0]-100,coordinates_wumpus[1]))
-                posible_coordinates_wumpus.append((coordinates_wumpus[0],coordinates_wumpus[1]+100))
+            elif GameField.player.mc_coords[0] < coordinates_wumpus_X and GameField.player.mc_coords[1] > coordinates_wumpus_Y:
+                posible_coordinates_wumpus.append((coordinates_wumpus_X-100,coordinates_wumpus_Y))
+                posible_coordinates_wumpus.append((coordinates_wumpus_X,coordinates_wumpus_Y+100))
                 
-            elif self.player.mc_coords[0] < coordinates_wumpus[0] and self.player.mc_coords[1] < coordinates_wumpus[1]:
-                posible_coordinates_wumpus.append((coordinates_wumpus[0]-100,coordinates_wumpus[1]))
-                posible_coordinates_wumpus.append((coordinates_wumpus[0],coordinates_wumpus[1]-100))
-        
-        
+            elif GameField.player.mc_coords[0] < coordinates_wumpus_X and GameField.player.mc_coords[1] < coordinates_wumpus_Y:
+                posible_coordinates_wumpus.append((coordinates_wumpus_X-100,coordinates_wumpus_Y))
+                posible_coordinates_wumpus.append((coordinates_wumpus_X,coordinates_wumpus_Y-100))
         else:
             
-            if self.player.mc_coords[0] == coordinates_wumpus[0] and self.player.mc_coords[1] > coordinates_wumpus[1]:
-                posible_coordinates_wumpus.append((coordinates_wumpus[0],coordinates_wumpus[1]+100))
+            if GameField.player.mc_coords[0] == coordinates_wumpus_X and GameField.player.mc_coords[1] > coordinates_wumpus_Y:
+                posible_coordinates_wumpus.append((coordinates_wumpus_X,coordinates_wumpus_Y+100))
                 
-            elif self.player.mc_coords[0] == coordinates_wumpus[0] and self.player.mc_coords[1] < coordinates_wumpus[1]:
-                posible_coordinates_wumpus.append((coordinates_wumpus[0],coordinates_wumpus[1]-100))
+            elif GameField.player.mc_coords[0] == coordinates_wumpus_X and GameField.player.mc_coords[1] < coordinates_wumpus_Y:
+                posible_coordinates_wumpus.append((coordinates_wumpus_X,coordinates_wumpus_Y-100))
                 
-            elif self.player.mc_coords[1] == coordinates_wumpus[1] and self.player.mc_coords[0] > coordinates_wumpus[0]:
-                posible_coordinates_wumpus.append((coordinates_wumpus[0]+100,coordinates_wumpus[1]))
+            elif GameField.player.mc_coords[1] == coordinates_wumpus_Y and GameField.player.mc_coords[0] > coordinates_wumpus_X:
+                posible_coordinates_wumpus.append((coordinates_wumpus_X+100,coordinates_wumpus_Y))
                 
-            elif self.player.mc_coords[1] == coordinates_wumpus[1] and self.player.mc_coords[0] < coordinates_wumpus[0]:
-                posible_coordinates_wumpus.append((coordinates_wumpus[0]-100,coordinates_wumpus[1]))
+            elif GameField.player.mc_coords[1] == coordinates_wumpus_Y and GameField.player.mc_coords[0] < coordinates_wumpus_X:
+                posible_coordinates_wumpus.append((coordinates_wumpus_X-100,coordinates_wumpus_Y))
                 
                 
         #Picks the new spot of the Wumpus out an list with the options
         coordinates_wumpus_move = choice(posible_coordinates_wumpus)
         print("Verplaatste coordinaten Wumpus: ",coordinates_wumpus_move, "\n")
+        coordinates_wumpus_move = coordinates_wumpus_move[0],coordinates_wumpus_move[1]
+        print("Verplaatste coordinaten Wumpus 2: ",coordinates_wumpus_move, "\n")
         
-        coordinates_wumpus_list_move.append(coordinates_wumpus_move)
-            
+        coordinates_wumpus_list_move.append(coordinates_wumpus_move)            
             
             
         """Makes the circles which represent the player, the Wumpus where it is when it moved and the original spot of the Wumpus"""
@@ -334,10 +360,15 @@ class GameField(QtGui.QWidget):
         pixmap_wumpusOriginal = QtGui.QPixmap("images/monsterOriginalSpot.jpg")
         pixlabel_wumpus_original = QtGui.QLabel(self)
         pixlabel_wumpus_original.setPixmap(pixmap_wumpusOriginal)
-        pixlabel_wumpus_original.move(coordinates_wumpus_list[0][0]-17.5,coordinates_wumpus_list[0][1]-24)
+        pixlabel_wumpus_original.move(coordinates_wumpus_list[0][0][0]-17.5,coordinates_wumpus_list[0][0][1]-24)
         pixlabel_wumpus_original.show()
-            
-        return coordinates_wumpus_list_move
+        
+        
+        #Makes coordinates available to use in antother class
+        GameField.coordinates_wumpus_list_move = coordinates_wumpus_list_move
+        
+        
+        return GameField.coordinates_wumpus_list_move
 
 
 
@@ -346,7 +377,7 @@ class GameField(QtGui.QWidget):
         #random original position of Wumpus
         self.position_wumpus = XY(randrange(self.width),randrange(self.height))
         print("Originele positie Wumpus: ",self.position_wumpus)
-        coordinates_wumpus = [self.position_wumpus.x*100+49, self.position_wumpus.y*100+49]
+        coordinates_wumpus = [(self.position_wumpus.x*100+49, self.position_wumpus.y*100+49)]
         print("Originele coordinaten Wumpus: ",coordinates_wumpus,"\n")
         
         return coordinates_wumpus
