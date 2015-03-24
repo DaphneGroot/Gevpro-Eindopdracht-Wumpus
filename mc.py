@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+#mc.py
+#Roos Vermeulen, Hennie Veldthuis, Daphne Groot
 
 import sys
 import random
@@ -12,10 +14,10 @@ class McView (QtGui.QGraphicsView):
     def keyPressEvent(self, e):
         self.parentWidget().keyPressEvent(e)
 
+
 class Mc (QtGui.QWidget):
-    
+    """Makes player and arrows"""    
     def __init__(self, parent, initial_mc_position):
-        
         super(Mc, self).__init__(parent)
         self.parent      = parent
         self.mc_position = initial_mc_position
@@ -28,14 +30,15 @@ class Mc (QtGui.QWidget):
         
     def controlMc(self):
         """ Assign mc attributes. """
-        
+        #Initialize attributes
         self.mc_walking        = False
         self.arrow_shooting    = False
         self.times_arrow_moved = 0
         self.tile_width        = 100
         self.space_pressed     = False
         self.arrow_path        = []
-
+        
+        #Show image player
         self.pixmap   = QtGui.QPixmap("mc_ph.png")
         self.mc_view  = McView(self)
         self.mc_scene = QtGui.QGraphicsScene(QtCore.QRectF(0,0,500,400), self.mc_view)
@@ -46,103 +49,112 @@ class Mc (QtGui.QWidget):
         
         self.mc_char.setPos(self.mc_coords[0], self.mc_coords[1])
         
+        
     def keyPressEvent(self, e):
         """ Define actions for all key press events. """
-
         if self.mc_walking == False and self.arrow_shooting == False: # no input allowed while mc is walking
             #--- left arrow --#
-            if e.key() == QtCore.Qt.Key_Left:
-                print("--Left Arrow")
-                
-                if self.space_pressed == False and self.parent.tile_dic[self.mc_position].W_open:
-                    # move player position
-                    self.mc_walking = True
-                    self.animateMc(0, -1)
-                    self.parent.parent.endTurn()
+            if e.key() == QtCore.Qt.Key_Left:                
+                if self.space_pressed == False:
+                    if self.parent.tile_dic[self.mc_position].W_open:
+                        # move player position
+                        self.mc_walking = True
+                        self.animateMc(0, -1)
+                        self.parent.parent.endTurn()
+                    else:
+                        pass
                 else:
                     # move arrow position
                     self.arrow_shooting = True
                     self.moveArrow("left")
                     pass
-                
-                print(self.mc_coords)
             
             #--- right arrow ---#
             if e.key() == QtCore.Qt.Key_Right:
-                print("--Right Arrow")
-                
-                if self.space_pressed == False and self.parent.tile_dic[self.mc_position].E_open:
-                    # move player position
-                    self.mc_walking = True
-                    self.animateMc(0, 1)
-                    self.parent.parent.endTurn()
+                if self.space_pressed == False:
+                    if self.parent.tile_dic[self.mc_position].E_open:
+                        # move player position
+                        self.mc_walking = True
+                        self.animateMc(0, 1)
+                        self.parent.parent.endTurn()
+                    else:
+                        pass
                 else:
                     # move arrow position
                     self.arrow_shooting = True
                     self.moveArrow("right")
                     pass
-            
-                print(self.mc_coords)
         
             #--- up arrow ---#
-            if e.key() == QtCore.Qt.Key_Up:
-                print("--Up Arrow")
-            
-                if self.space_pressed == False and self.parent.tile_dic[self.mc_position].N_open:
-                    # move player position
-                    self.mc_walking = True
-                    self.animateMc(1, -1)
-                    self.parent.parent.endTurn()
+            if e.key() == QtCore.Qt.Key_Up:            
+                if self.space_pressed == False:
+                    if self.parent.tile_dic[self.mc_position].N_open:
+                        # move player position
+                        self.mc_walking = True
+                        self.animateMc(1, -1)
+                        self.parent.parent.endTurn()
+                    else:
+                        pass
                 else:
                     # move arrow position
                     self.arrow_shooting = True
                     self.moveArrow("up")
                     pass
             
-                print(self.mc_coords)
-            
             #--- down arrow ---#
             if e.key() == QtCore.Qt.Key_Down:
-                print("--Down Arrow")
                 
-                if self.space_pressed == False and self.parent.tile_dic[self.mc_position].S_open:
-                    # move player position
-                    self.mc_walking = True
-                    self.animateMc(1, 1)
-                    self.parent.parent.endTurn()
+                if self.space_pressed == False:
+                    if self.parent.tile_dic[self.mc_position].S_open:
+                        # move player position
+                        self.mc_walking = True
+                        self.animateMc(1, 1)
+                        self.parent.parent.endTurn()
+                    else:
+                        pass
                 else:
                     # move arrow position
                     self.arrow_shooting = True
                     self.moveArrow("down")
                     pass
-                
-                print(self.mc_coords)
             
             #--- space ---#    
             if e.key() == QtCore.Qt.Key_Space:
-                print("--Space")
-                
-                if self.space_pressed == True:
-                    self.space_pressed = False
-                    self.initializeArrow(False) # remove arrow
-                    self.arrow_path    = [] # remove content arrow_path
-                    print("Arrow canceled")
-                else:
-                    self.space_pressed = True
-                    self.initializeArrow(True) # create arrow
-                    print("Arrow ready")
-                
-                print(self.space_pressed == True)
+                self.parent.parent.sidebar.label_arrow_too_far.setText("")
+                if self.parent.parent.sidebar.arrow > 0:
+                    if self.space_pressed == True:
+                        self.space_pressed = False
+                        self.initializeArrow(False) # remove arrow
+                        self.arrow_path    = [] # remove content arrow_path
+                    else:
+                        self.space_pressed = True
+                        self.initializeArrow(True) # create arrow
                 
             #--- return ---#
             if e.key() == QtCore.Qt.Key_Return:
-                print("--Return")
                 if self.space_pressed == True:
+                    self.parent.parent.sidebar.label_arrow_too_far.setText("")
+                    self.parent.parent.sidebar.arrow -= 1
+                    self.parent.parent.sidebar.updateSidebar()
                     self.space_pressed = False
-                    #print(self.arrow_path)
-                    self.arrow_path    = [] # remove content arrow_path
-                    print("Arrow shot")
-                    self.parent.parent.endTurn()
+                    
+                    game_over = False
+                    
+                    #Checks if player or Wumpus is hit by an arrow
+                    for coords in self.arrow_path:
+                        if coords == self.mc_coords:
+                            self.parent.parent.gameOver("lose", self.parent.parent.sidebar.gold,"arrow")
+                            game_over = True
+                            break
+                        elif coords == [self.parent.coordinates_wumpus_list_move[0][0],self.parent.coordinates_wumpus_list_move[0][1]]:
+                            self.parent.parent.gameOver("win", self.parent.parent.sidebar.gold,"")
+                            game_over = True
+                            break
+                            
+                    if not game_over:
+                        self.arrow_path    = [] # remove content arrow_path
+                        self.initializeArrow(False)
+                        self.parent.parent.endTurn()
             
 
     def animateMc(self, x_or_y, direction):
@@ -187,7 +199,8 @@ class Mc (QtGui.QWidget):
         if self.times_arrow_moved >= 5:
             self.arrow_shooting = False
             self.arrow_path    = [] # remove content arrow_path
-            print("Arrow too far, can't move any further")
+            self.parent.parent.sidebar.label_arrow_too_far.setText("You can't move your arrow\nany further")
+            self.parent.parent.sidebar.label_arrow_too_far.adjustSize()
         else:
             self.times_arrow_moved += 1
             if key == "left":
@@ -202,7 +215,8 @@ class Mc (QtGui.QWidget):
             if key == "down":
                 self.arrow.setRotation(90)
                 self.animateArrow(1, 1)
-
+                
+                
     def updateMcPosition(self):
         self.mc_position = ((self.mc_coords[0]-49)/100, (self.mc_coords[1]-49)/100)
             
