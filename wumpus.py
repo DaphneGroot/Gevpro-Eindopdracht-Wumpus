@@ -143,7 +143,7 @@ class SideBar(QtGui.QWidget):
         
         #sets initial amount of gold, arrows and steps
         self.gold  = 0
-        self.arrow = 1
+        self.arrow = 4
         self.steps = 0
 
         self.setGeometry(0,0,200,400)
