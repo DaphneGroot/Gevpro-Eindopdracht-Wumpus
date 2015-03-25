@@ -479,7 +479,7 @@ class GameField(QtGui.QWidget):
         if self.tile_dic[player_position].bats: #bats
             new_position = self.placePlayerRandomly(True)
             self.player.mc_coords = [new_position.x*100+49, new_position.y*100+49]
-            self.player.mc_char.setPos(new_position.x*100+49,new_position.y*100+49)
+            self.player.mc_char.setPos(new_position.x*100+39,new_position.y*100+39)
             self.player.updateMcPosition()
             
         else:
