@@ -67,6 +67,7 @@ class StartScreen(QtGui.QWidget):
         self.start_label.setPixmap(start_pixmap)
 
         self.classic_button = QtGui.QPushButton("Start", self)
+        self.classic_button.move(7,7)
         self.classic_button.setStyle(QtGui.QStyleFactory.create('motif'))
         self.classic_button.setStyleSheet("""
             QPushButton {
@@ -129,6 +130,7 @@ class EndScreen(QtGui.QWidget):
         self.steps_label = QtGui.QLabel(self)
         self.gold_label = QtGui.QLabel(self)
         self.main_button = QtGui.QPushButton("Main", self)
+        self.main_button.move(7,7)
         self.main_button.setStyle(QtGui.QStyleFactory.create('motif'))
 
         self.text_label.move(200,150)
@@ -216,6 +218,7 @@ class SideBar(QtGui.QWidget):
         
         self.setGeometry(0,0,200,400)
         self.quitbutton = QtGui.QPushButton("Quit", self)
+        self.quitbutton.move(7,7)
         self.quitbutton.setStyle(QtGui.QStyleFactory.create('motif'))
         self.quitbutton.clicked.connect(self.parent.quitGame)
         
