@@ -34,7 +34,6 @@ class Window(QtGui.QWidget):
                 font-family: Verdana, sans-serif;
                 border-width: 5px;
             }
-
             QLabel {
                 color : #1C1209;
             }
@@ -138,6 +137,13 @@ class EndScreen(QtGui.QWidget):
         if result == "win":
             self.text_label.setText("CONGRATULATIONS!!!\nYour arrow pierced the Wumpus through his tiny, slimy brain.")
             self.text_label.adjustSize()
+            self.parent.setStyleSheet("color: green; background-color: black;")
+            self.main_button.setStyleSheet("""
+                QPushButton {
+                    background-color: green;
+                    color: #D6CBC3;
+                }
+                """)
         if result == "lose":
             if cause == "wumpus":
                 self.text_label.setText("Many who entered these caves,\nfell pray to the Wumpus and were never seen again...\nAnd you blindly followed them in their fate.\nYou died, and the Wumpus will continue to terrorize these caves!\n")
@@ -184,7 +190,6 @@ class EndScreen(QtGui.QWidget):
                 font-family: Verdana, sans-serif;
                 border-width: 5px;
             }
-
             QLabel {
                 color : #1C1209;
             }
@@ -277,13 +282,13 @@ class SideBar(QtGui.QWidget):
         #Generates appropriate messages
         if wumpus_present:
             messages += "You can smell the foul\nstench of the Wumpus\n\n"
-			
+            
         if bats_present:
             messages += "You hear the flapping\nof wings\n\n"
 
         if hole_present:
             messages += "You feel the draft from\nthe pit\n\n"
-		
+        
         if gold_present:
             messages += "You can detect a glimmer\n\n"
         
