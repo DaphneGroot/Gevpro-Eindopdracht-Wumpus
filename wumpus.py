@@ -27,6 +27,19 @@ class Window(QtGui.QWidget):
         self.setGeometry(400,200,700,400)
         self.setWindowTitle("Hunt the Wumpus")
 
+        self.setStyleSheet("""
+            QPushButton {
+                background: #C4C0A7;
+                color: black;
+                font-family: Verdana, sans-serif;
+                border-width: 5px;
+            }
+
+            QLabel {
+                color : #1C1209;
+            }
+            """)
+
         self.show()
 
     def toStartScreen(self):
@@ -48,14 +61,27 @@ class StartScreen(QtGui.QWidget):
 
     def __init__(self, parent):
         super(StartScreen, self).__init__(parent)
+        self.setGeometry(0,0,700,400)
         self.parent = parent
+        start_pixmap = QtGui.QPixmap("images/Start.png")
+        self.start_label = QtGui.QLabel(self)
+        self.start_label.setPixmap(start_pixmap)
 
         self.classic_button = QtGui.QPushButton("Start", self)
+        self.classic_button.setStyleSheet("""
+            QPushButton {
+                background: #42120D;
+                color: #D9D5C1;
+                font-family: Verdana, sans-serif;
+            }
+            """)
+        
         self.classic_button.clicked.connect(self.startGame)
 
     def startGame(self):
         self.parent.toGameScreen(classic_5x4)
         self.close()
+
 
 class GameScreen(QtGui.QWidget):
     """Generates game screen"""
@@ -116,12 +142,33 @@ class EndScreen(QtGui.QWidget):
             if cause == "wumpus":
                 self.text_label.setText("Many who entered these caves,\nfell pray to the Wumpus and were never seen again...\nAnd you blindly followed them in their fate.\nYou died, and the Wumpus will continue to terrorize these caves!\n")
                 self.text_label.adjustSize()
+                self.parent.setStyleSheet("color: #AD0000; background-color: black;")
+                self.main_button.setStyleSheet("""
+                    QPushButton {
+                        background-color: #8C0000;
+                        color: #D6CBC3;
+                    }
+                    """)
             elif cause == "arrow":
                 self.text_label.setText("*Sigh*\nYou silly human, you shot yourself.")
-                self.text_label.adjustSize()  
+                self.text_label.adjustSize()
+                self.parent.setStyleSheet("color: #AD0000; background-color: black;")
+                self.main_button.setStyleSheet("""
+                    QPushButton {
+                        background-color: #8C0000;
+                        color: #D6CBC3;
+                    }
+                    """)
             elif cause == "pit":
                 self.text_label.setText("Mwuahahahahah!\nYou fell into a bottomless pit. Enjoy falling forever!")
                 self.text_label.adjustSize()
+                self.parent.setStyleSheet("color: #AD0000; background-color: black;")
+                self.main_button.setStyleSheet("""
+                    QPushButton {
+                        background-color: #8C0000;
+                        color: #D6CBC3;
+                    }
+                    """)
 
         self.gold_label.setText("Gold: " + str(gold))
         self.steps_label.setText("Steps: " + str(steps))
@@ -130,6 +177,18 @@ class EndScreen(QtGui.QWidget):
         
     def newGame(self):
         self.parent.toStartScreen()
+        self.parent.setStyleSheet("""
+            QPushButton {
+                background: #C4C0A7;
+                color: black;
+                font-family: Verdana, sans-serif;
+                border-width: 5px;
+            }
+
+            QLabel {
+                color : #1C1209;
+            }
+            """)
         self.close()
         
 #============================================================================================
@@ -213,13 +272,13 @@ class SideBar(QtGui.QWidget):
                 
         #Generates appropriate messages
         if wumpus_present:
-            messages += "You can smell the foul stench\nof the Wumpus\n\n"
+            messages += "You can smell the foul\nstench of the Wumpus\n\n"
 			
         if bats_present:
-            messages += "You hear the flapping of wings\n\n"
+            messages += "You hear the flapping\nof wings\n\n"
 
         if hole_present:
-            messages += "You feel the draft from the pit\n\n"
+            messages += "You feel the draft from\nthe pit\n\n"
 		
         if gold_present:
             messages += "You can detect a glimmer\n\n"

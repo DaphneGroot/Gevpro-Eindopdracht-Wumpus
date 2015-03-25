@@ -39,15 +39,15 @@ class Mc (QtGui.QWidget):
         self.arrow_path        = []
         
         #Show image player
-        self.pixmap   = QtGui.QPixmap("mc_ph.png")
+        self.pixmap   = QtGui.QPixmap("images/mc.png")
         self.mc_view  = McView(self)
         self.mc_scene = QtGui.QGraphicsScene(QtCore.QRectF(0,0,500,400), self.mc_view)
         self.mc_view.setScene(self.mc_scene)
         self.mc_view.setStyleSheet("background: transparent")
 
         self.mc_char  = self.mc_scene.addPixmap(self.pixmap)
-        
-        self.mc_char.setPos(self.mc_coords[0], self.mc_coords[1])
+        self.mc_char.setTransformOriginPoint(self.pixmap.width() / 2, self.pixmap.height() / 2)        
+        self.mc_char.setPos(self.mc_coords[0]-10, self.mc_coords[1]-10)
         
         
     def keyPressEvent(self, e):
@@ -59,6 +59,7 @@ class Mc (QtGui.QWidget):
                     if self.parent.tile_dic[self.mc_position].W_open:
                         # move player position
                         self.mc_walking = True
+                        self.mc_char.setRotation(180)
                         self.animateMc(0, -1)
                         self.parent.parent.endTurn()
                     else:
@@ -75,6 +76,7 @@ class Mc (QtGui.QWidget):
                     if self.parent.tile_dic[self.mc_position].E_open:
                         # move player position
                         self.mc_walking = True
+                        self.mc_char.setRotation(0)
                         self.animateMc(0, 1)
                         self.parent.parent.endTurn()
                     else:
@@ -91,6 +93,7 @@ class Mc (QtGui.QWidget):
                     if self.parent.tile_dic[self.mc_position].N_open:
                         # move player position
                         self.mc_walking = True
+                        self.mc_char.setRotation(270)
                         self.animateMc(1, -1)
                         self.parent.parent.endTurn()
                     else:
@@ -108,6 +111,7 @@ class Mc (QtGui.QWidget):
                     if self.parent.tile_dic[self.mc_position].S_open:
                         # move player position
                         self.mc_walking = True
+                        self.mc_char.setRotation(90)
                         self.animateMc(1, 1)
                         self.parent.parent.endTurn()
                     else:
@@ -164,7 +168,7 @@ class Mc (QtGui.QWidget):
             time.sleep(0.01)
             self.mc_coords[x_or_y] += direction
             self.stepcounter += 1
-            self.mc_char.setPos(self.mc_coords[0], self.mc_coords[1]) # change mc position to new coordinates
+            self.mc_char.setPos(self.mc_coords[0]-10, self.mc_coords[1]-10) # change mc position to new coordinates
             QtGui.QApplication.processEvents() # needed to update gui, normally won"t update during loop
             if self.stepcounter == self.tile_width: # stop loop when the mc has traveled the length of one tile
                 self.mc_walking = False
@@ -176,7 +180,7 @@ class Mc (QtGui.QWidget):
             time.sleep(0.01)
             self.arrow_coords[x_or_y] += direction
             self.stepcounter += 1
-            self.arrow.setPos(self.arrow_coords[0], self.arrow_coords[1]) # change arrow position to new coordinates
+            self.arrow.setPos(self.arrow_coords[0]-10, self.arrow_coords[1]-10) # change arrow position to new coordinates
             QtGui.QApplication.processEvents() # needed to update gui, normally won"t update during loop
             if self.stepcounter == self.tile_width: # stop loop when the arrow has traveled the length of one tile
                 self.arrow_path.append(self.arrow_coords[:])
@@ -186,11 +190,11 @@ class Mc (QtGui.QWidget):
         """Creates and deletes arrow upon pressing space"""
         self.times_arrow_moved = 0
         if create_arrow == True:
-            self.arrow_pixmap = QtGui.QPixmap("images/arrow.png")
+            self.arrow_pixmap = QtGui.QPixmap("images/arrow2.png")
             self.arrow  = self.mc_scene.addPixmap(self.arrow_pixmap)
             self.arrow.setTransformOriginPoint(self.arrow_pixmap.width() / 2, self.arrow_pixmap.height() / 2)
             self.arrow_coords = self.mc_coords[:] # copy mc coordinates
-            self.arrow.setPos(self.arrow_coords[0], self.arrow_coords[1])
+            self.arrow.setPos(self.arrow_coords[0]-10, self.arrow_coords[1]-10)
         else:
             self.mc_scene.removeItem(self.arrow) # deletes arrow
         
