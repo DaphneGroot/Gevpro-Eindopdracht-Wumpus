@@ -656,6 +656,7 @@ class Tile(QtGui.QWidget):
 def main():
     
     app = QtGui.QApplication(sys.argv)
+    app.setStyle('cleanlooks')
     window = Window()
     sys.exit(app.exec_())
     
