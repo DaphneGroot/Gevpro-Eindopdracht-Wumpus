@@ -3,9 +3,10 @@ By: Roos Vermeulen, Hennie Veldthuis & Daphne Groot
 ---------------------------------------------------
 
 Description:
-Hunt the Wumpus is a classic video game, based on a simple hide and seek format. 
-It the game, you feature as a player character who is traped in a gave,
-together with a monster, the Wumpus. The cave consist of a network of rooms. 
+Hunt the Wumpus is a classic video game, based on a simple hide and seek 
+format. It this game, you feature as a player character who is traped in 
+a cave, together with a monster, the Wumpus. The cave consist of a 
+network of rooms. 
 
 Some of the rooms contain obstacles, for more information about the 
 obstacles see the subject 'Objects', wich can either help you or be 
@@ -13,7 +14,7 @@ fatal to you.
 
 The purpose of the game is to kill the Wumpus and escape in this way. 
 But watch out. It might be possible that you will get killed..
-_________________________________________________________________________________________
+_________________________________________________________________________
 
 
 Objects:
@@ -66,8 +67,7 @@ are different kind of messages:
 'You faintly smell something unpleasant'
 	When you see this, you should be carefull, because the Wumpus 
 	is getting closer to you, but it isn't in a room next to you.
-_________________________________________________________________________________________
-
+_________________________________________________________________________
 
 Controlls:
 To move the player, you can use the arrow keys.
@@ -77,8 +77,7 @@ and to really shoot the arrow after you choose the route it should take,
 you only have to press the enter key. If you made a mstake and you don't 
 want to shoot your arrow as you first told it to, you simply press the 
 spacebar again to cancel the action.
-_________________________________________________________________________________________
-
+_________________________________________________________________________
 
 Ending the game:
 You can either end the game by losing or winning.
