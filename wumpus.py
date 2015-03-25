@@ -249,6 +249,7 @@ class SideBar(QtGui.QWidget):
         self.label_gold.setText("gold: "+str(self.gold))
         self.label_arrow.setText("arrows: "+str(self.arrow))
         self.label_steps.setText("steps: "+str(self.steps))
+        self.label_steps.adjustSize()
 
         
     def sendMessages(self, player_position, tile_dic):
