@@ -103,7 +103,6 @@ class Mc (QtGui.QWidget):
             
             #--- down arrow ---#
             if e.key() == QtCore.Qt.Key_Down:
-                
                 if self.space_pressed == False:
                     if self.parent.tile_dic[self.mc_position].S_open:
                         # move player position
@@ -191,6 +190,8 @@ class Mc (QtGui.QWidget):
             self.arrow.setTransformOriginPoint(self.arrow_pixmap.width() / 2, self.arrow_pixmap.height() / 2)
             self.arrow_coords = self.mc_coords[:] # copy mc coordinates
             self.arrow.setPos(self.arrow_coords[0], self.arrow_coords[1])
+
+            self.current_arrow_position = self.mc_position
         else:
             self.mc_scene.removeItem(self.arrow) # deletes arrow
         
@@ -202,20 +203,25 @@ class Mc (QtGui.QWidget):
             self.parent.parent.sidebar.label_arrow_too_far.setText("You can't move your arrow\nany further")
             self.parent.parent.sidebar.label_arrow_too_far.adjustSize()
         else:
-            self.times_arrow_moved += 1
-            if key == "left":
+            self.current_arrow_position = ((self.arrow_coords[0]-49)/100,(self.arrow_coords[1]-49)/100)
+            if key == "left" and self.parent.tile_dic[self.current_arrow_position].W_open:
+                self.times_arrow_moved += 1
                 self.arrow.setRotation(180)
                 self.animateArrow(0, -1)
-            if key == "right":
+            elif key == "right" and self.parent.tile_dic[self.current_arrow_position].E_open:
+                self.times_arrow_moved += 1
                 self.arrow.setRotation(0)
                 self.animateArrow(0, 1)
-            if key == "up":
+            elif key == "up" and self.parent.tile_dic[self.current_arrow_position].N_open:
+                self.times_arrow_moved += 1
                 self.arrow.setRotation(270)
                 self.animateArrow(1, -1)
-            if key == "down":
+            elif key == "down" and self.parent.tile_dic[self.current_arrow_position].S_open:
+                self.times_arrow_moved += 1
                 self.arrow.setRotation(90)
                 self.animateArrow(1, 1)
-                
+            else:
+                self.arrow_shooting = False
                 
     def updateMcPosition(self):
         self.mc_position = ((self.mc_coords[0]-49)/100, (self.mc_coords[1]-49)/100)
