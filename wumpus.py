@@ -145,7 +145,7 @@ class EndScreen(QtGui.QWidget):
                 self.parent.setStyleSheet("color: #AD0000; background-color: black;")
                 self.main_button.setStyleSheet("""
                     QPushButton {
-                        background-color: #8C0000;
+                        background-color: #AD0000;
                         color: #D6CBC3;
                     }
                     """)
@@ -170,7 +170,7 @@ class EndScreen(QtGui.QWidget):
                     }
                     """)
 
-        self.gold_label.setText("Gold: " + str(gold))
+        self.gold_label.setText("Gold:  " + str(gold))
         self.steps_label.setText("Steps: " + str(steps))
 
         self.main_button.clicked.connect(self.newGame)
@@ -195,16 +195,18 @@ class EndScreen(QtGui.QWidget):
 
 class SideBar(QtGui.QWidget):
     """Creates left side bar in game screen"""
+    
 
     def __init__(self, parent):
         super(SideBar, self).__init__(parent)
         self.parent = parent
         
+        
         #sets initial amount of gold, arrows and steps
         self.gold  = 0
         self.arrow = 4
         self.steps = 0
-
+        
         self.setGeometry(0,0,200,400)
         self.quitbutton = QtGui.QPushButton("Quit", self)
         self.quitbutton.clicked.connect(self.parent.quitGame)
@@ -214,19 +216,21 @@ class SideBar(QtGui.QWidget):
         self.label_messages = QtGui.QLabel(self)
         self.label_messages.move(10,120)
         
-        self.label_gold = QtGui.QLabel("gold: "+str(self.gold),self)
+        self.label_gold = QtGui.QLabel("Gold:  "+str(self.gold),self)
         self.label_gold.move(10,40)
         
-        self.label_arrow = QtGui.QLabel("arrows: "+str(self.arrow),self)
+        self.label_arrow = QtGui.QLabel("Arrows: "+str(self.arrow),self)
         self.label_arrow.move(70,40)
         
-        self.label_steps = QtGui.QLabel("steps: "+str(self.steps),self)
+        self.label_steps = QtGui.QLabel("Steps: "+str(self.steps),self)
         self.label_steps.move(10,60)
         
         self.sendMessages(self.parent.gamefield.player.mc_position, self.parent.gamefield.tile_dic)
         
         self.label_arrow_too_far = QtGui.QLabel("",self)
         self.label_arrow_too_far.move(10,350)
+        
+        
         
         
     def updateSidebar(self):
@@ -641,6 +645,7 @@ class Tile(QtGui.QWidget):
 def main():
     
     app = QtGui.QApplication(sys.argv)
+    app.setStyle('cleanlooks')
     window = Window()
     sys.exit(app.exec_())
     
