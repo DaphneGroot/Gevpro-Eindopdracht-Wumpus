@@ -246,9 +246,9 @@ class SideBar(QtGui.QWidget):
         
     def updateSidebar(self):
         #Update text in sidebar
-        self.label_gold.setText("gold: "+str(self.gold))
-        self.label_arrow.setText("arrows: "+str(self.arrow))
-        self.label_steps.setText("steps: "+str(self.steps))
+        self.label_gold.setText("Gold:  "+str(self.gold))
+        self.label_arrow.setText("Arrows: "+str(self.arrow))
+        self.label_steps.setText("Steps: "+str(self.steps))
         self.label_steps.adjustSize()
 
         
