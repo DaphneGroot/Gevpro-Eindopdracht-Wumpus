@@ -194,7 +194,6 @@ class Mc (QtGui.QWidget):
             self.arrow.setTransformOriginPoint(self.arrow_pixmap.width() / 2, self.arrow_pixmap.height() / 2)
             self.arrow_coords = self.mc_coords[:] # copy mc coordinates
             self.arrow.setPos(self.arrow_coords[0]-10, self.arrow_coords[1]-10)
-
             self.current_arrow_position = self.mc_position
         else:
             self.mc_scene.removeItem(self.arrow) # deletes arrow
