@@ -1,6 +1,9 @@
 Manual Hunt the Wumpus
 By: Roos Vermeulen, Hennie Veldthuis & Daphne Groot
 ---------------------------------------------------
+To open the game you have to type 'python3 wumpus.py' in the terminal 
+on Linux.
+---------------------------------------------------
 
 Description:
 Hunt the Wumpus is a classic video game, based on a simple hide and seek 
